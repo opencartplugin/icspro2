@@ -17,7 +17,7 @@ class ControllerExtensionTotalShipping extends Controller {
 
         $data['entry_district'] = $this->language->get('entry_district');//frd 1
         $data['entry_subdistrict'] = $this->language->get('entry_subdistrict');//frd 1
-      
+
 			$data['entry_postcode'] = $this->language->get('entry_postcode');
 
 			$data['button_quote'] = $this->language->get('button_quote');
@@ -55,7 +55,7 @@ class ControllerExtensionTotalShipping extends Controller {
 
   			//------
 
-      
+
 			if (isset($this->session->data['shipping_address']['postcode'])) {
 				$data['postcode'] = $this->session->data['shipping_address']['postcode'];
 			} else {
@@ -96,7 +96,7 @@ class ControllerExtensionTotalShipping extends Controller {
     			}
     		}
 
-      
+
 
 		if (!isset($this->request->post['zone_id']) || $this->request->post['zone_id'] == '') {
 			$json['error']['zone'] = $this->language->get('error_zone');
@@ -149,7 +149,7 @@ class ControllerExtensionTotalShipping extends Controller {
 
         'district_id'    => $this->request->post['district_id'],//frd 3
         'subdistrict_id' => $this->request->post['subdistrict_id'],//frd 3
-      
+
 				'zone'           => $zone,
 				'zone_code'      => $zone_code,
 				'country_id'     => $this->request->post['country_id'],
@@ -179,7 +179,7 @@ class ControllerExtensionTotalShipping extends Controller {
 
   			//---
 
-      
+
 			$quote_data = array();
 
 			$this->load->model('extension/extension');
@@ -187,21 +187,23 @@ class ControllerExtensionTotalShipping extends Controller {
 			$results = $this->model_extension_extension->getExtensions('shipping');
 
         //frd 5
-        if ($this->config->get('shindopro_status')==true) {
+        /*if ($this->config->get('shindopro_status')==true) {
   				$results[] = array('code'=>'igspospro');
   				$results[] = array('code'=>'igstikipro');
   				$results[] = array('code'=>'igsjnepro');
   				$results[] = array('code'=>'igswahanapro');
   				$results[] = array('code'=>'igsjntpro');
-  			}
+  			}*/
+				// frd update
+				$mod = array('igsjnepro','igspospro','igstikipro', 'igswahanapro', 'igsjntpro', 'igssicepatpro');
   			foreach ($results as $key => $result) {
-  				if ($result['code']=='shindopro') {
+  				if (in_array($result['code'], $mod)) {
   					unset ($results[$key]);
   				}
   			}
   			//----
 
-      
+
 
 			foreach ($results as $result) {
 				if ($this->config->get($result['code'] . '_status')) {
@@ -319,7 +321,7 @@ class ControllerExtensionTotalShipping extends Controller {
       		$this->response->addHeader('Content-Type: application/json');
       		$this->response->setOutput(json_encode($json));
       	}
-      
+
 	public function country() {
 		$json = array();
 

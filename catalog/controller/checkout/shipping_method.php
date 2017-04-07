@@ -12,7 +12,7 @@ class ControllerCheckoutShippingMethod extends Controller {
 			$results = $this->model_extension_extension->getExtensions('shipping');
 
         //frd 1
-        if ($this->config->get('shindopro_status')==true) {
+        /*if ($this->config->get('shindopro_status')==true) {
   				$results[] = array('code'=>'igspospro');
   				$results[] = array('code'=>'igstikipro');
   				$results[] = array('code'=>'igsjnepro');
@@ -23,9 +23,17 @@ class ControllerCheckoutShippingMethod extends Controller {
   				if ($result['code']=='shindopro') {
   					unset ($results[$key]);
   				}
+  			}*/
+				// frd update
+				$mod = array('igsjnepro','igspospro','igstikipro', 'igswahanapro', 'igsjntpro', 'igssicepatpro');
+  			foreach ($results as $key => $result) {
+  				if (in_array($result['code'], $mod)) {
+  					unset ($results[$key]);
+  				}
   			}
+
   			//----
-      
+
 
 			foreach ($results as $result) {
 				if ($this->config->get($result['code'] . '_status')) {
@@ -89,6 +97,7 @@ class ControllerCheckoutShippingMethod extends Controller {
 	}
 
 	public function save() {
+		//print_r($this->request->post);
 		$this->load->language('checkout/checkout');
 
 		$json = array();
@@ -131,7 +140,7 @@ class ControllerCheckoutShippingMethod extends Controller {
 			$json['error']['warning'] = $this->language->get('error_shipping');
 		} else {
 			$shipping = explode('.', $this->request->post['shipping_method']);
-
+			//print_r($this->session->data['shipping_methods']);//[$shipping[0]]['quote'][$shipping[1]]);
 			if (!isset($shipping[0]) || !isset($shipping[1]) || !isset($this->session->data['shipping_methods'][$shipping[0]]['quote'][$shipping[1]])) {
 				$json['error']['warning'] = $this->language->get('error_shipping');
 			}

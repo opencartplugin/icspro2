@@ -478,7 +478,7 @@
         <option value="<?php echo $payment_zone_id; ?>"></option>
         <?php } ?>
         <!---->
-      
+
                   </select>
                 </div>
               </div>
@@ -508,7 +508,7 @@
         </div>
 
         <!------>
-      
+
               <?php foreach ($custom_fields as $custom_field) { ?>
               <?php if ($custom_field['location'] == 'address') { ?>
               <?php if ($custom_field['type'] == 'select') { ?>
@@ -723,7 +723,7 @@
         <option value="<?php echo $shipping_zone_id; ?>"></option>
         <?php } ?>
         <!---->
-      
+
                   </select>
                 </div>
               </div>
@@ -750,7 +750,7 @@
             </div>
           </div>
           <!------>
-        
+
               <?php foreach ($custom_fields as $custom_field) { ?>
               <?php if ($custom_field['location'] == 'address') { ?>
               <?php if ($custom_field['type'] == 'select') { ?>
@@ -2214,10 +2214,10 @@ $('#button-shipping-address').on('click', function() {
 									if (!json['shipping_methods'][i]['error']) {
 										for (j in json['shipping_methods'][i]['quote']) {
 											if (json['shipping_methods'][i]['quote'][j]['code'] == $('select[name=\'shipping_method\'] option:selected').val()) {
-												html += '<option value="' + json['shipping_methods'][i]['quote'][j]['code'] + '" selected="selected">' + json['shipping_methods'][i]['quote'][j]['title'] + ' - ' + json['shipping_methods'][i]['quote'][j]['text'] + '</option>';
-											} else {
-												html += '<option value="' + json['shipping_methods'][i]['quote'][j]['code'] + '">' + json['shipping_methods'][i]['quote'][j]['title'] + ' - ' + json['shipping_methods'][i]['quote'][j]['text'] + '</option>';
-											}
+                          html += '<option value="' + json['shipping_methods'][i]['quote'][j]['code'] + '" selected="selected">' + json['shipping_methods'][i]['quote'][j]['title'] +  ' - ' + json['shipping_methods'][i]['quote'][j]['text'] + '</option>';
+                      } else {
+												  html += '<option value="' + json['shipping_methods'][i]['quote'][j]['code'] + '">' + json['shipping_methods'][i]['quote'][j]['title'] + ' - ' + json['shipping_methods'][i]['quote'][j]['text'] + '</option>';
+                      }
 										}
 									} else {
 										html += '<option value="" style="color: #F00;" disabled="disabled">' + json['shipping_method'][i]['error'] + '</option>';
@@ -2574,7 +2574,7 @@ $('.datetime').datetimepicker({
 $('.time').datetimepicker({
 	pickDate: false
 });
-//--></script> 
+//--></script>
 
         <!--frd 5-->
         <script type="text/javascript"><!--
@@ -2731,7 +2731,7 @@ $('.time').datetimepicker({
         /*---*/
 
         //--></script>
-      
+
   <script type="text/javascript">
 // Sort the custom fields
 $('#tab-customer .form-group[data-sort]').detach().each(function() {
@@ -2777,4 +2777,4 @@ $('#tab-shipping .form-group[data-sort]').detach().each(function() {
 	}
 });
 </script></div>
-<?php echo $footer; ?> 
+<?php echo $footer; ?>

@@ -8,7 +8,7 @@ class ControllerExtensionShippingShindopro extends Controller {
 		$this->document->setTitle($this->language->get('heading_title'));
 
 		$this->load->model('setting/setting');
-		$mod = array('igsjnepro','igspospro','igstikipro', 'igswahanapro', 'igsjntpro');
+		$mod = array('igsjnepro','igspospro','igstikipro', 'igswahanapro', 'igsjntpro', 'igssicepatpro');
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
 			$this->model_setting_setting->editSetting('shindopro', $this->request->post);
 			foreach ($mod as $m) {
@@ -26,6 +26,8 @@ class ControllerExtensionShippingShindopro extends Controller {
 		$data['text_none'] = $this->language->get('text_none');
 		$data['text_enabled'] = $this->language->get('text_enabled');
 		$data['text_disabled'] = $this->language->get('text_disabled');
+		$data['text_yes'] = $this->language->get('text_yes');
+		$data['text_no'] = $this->language->get('text_no');
 		$data['text_select'] = $this->language->get('text_select');
 		$data['text_all_zones'] = $this->language->get('text_all_zones');
 		$data['tab_general'] = $this->language->get('tab_general');
@@ -35,6 +37,8 @@ class ControllerExtensionShippingShindopro extends Controller {
 		}
 
 		$data['entry_apikey'] = $this->language->get('entry_apikey');
+		$data['entry_sort'] = $this->language->get('entry_sort');
+		$data['entry_title'] = $this->language->get('entry_title');
 		$data['entry_handling'] = $this->language->get('entry_handling');
 		$data['entry_handlingmode'] = $this->language->get('entry_handlingmode');
 		$data['option_handlingmode1'] = $this->language->get('option_handlingmode1');
@@ -112,6 +116,17 @@ class ControllerExtensionShippingShindopro extends Controller {
 		} else {
 			$data['shindopro_apikey'] = $this->config->get('shindopro_apikey');
 		}
+		if (isset($this->request->post['shindopro_title'])) {
+			$data['shindopro_title'] = $this->request->post['shindopro_title'];
+		} else {
+			$data['shindopro_title'] = $this->config->get('shindopro_title');
+		}
+		if (isset($this->request->post['shindopro_sort'])) {
+			$data['shindopro_sort'] = $this->request->post['shindopro_sort'];
+		} else {
+			$data['shindopro_sort'] = $this->config->get('shindopro_sort');
+		}
+
 		if (isset($this->request->post['shindopro_status'])) {
 			$data['shindopro_status'] = $this->request->post['shindopro_status'];
 		} else {
@@ -182,6 +197,7 @@ class ControllerExtensionShippingShindopro extends Controller {
 		$data['igstikipro_services'] = array();
 		$data['igswahanapro_services'] = array();
 		$data['igsjntpro_services'] = array();
+		$data['igssicepatpro_services'] = array();
 
 		$data['igsjnepro_services'][] = array(
 			'text'  => 'Ongkos Kirim Ekonomis',
@@ -194,6 +210,22 @@ class ControllerExtensionShippingShindopro extends Controller {
 		$data['igsjnepro_services'][] = array(
 			'text'  => 'Yakin Esok Sampai',
 			'value' => 'YES'
+		);
+		$data['igsjnepro_services'][] = array(
+			'text'  => 'JNE City Courier',
+			'value' => 'CTC'
+		);
+		$data['igsjnepro_services'][] = array(
+			'text'  => 'JNE City Courier',
+			'value' => 'CTCOKE'
+		);
+		$data['igsjnepro_services'][] = array(
+			'text'  => 'JNE City Courier',
+			'value' => 'CTCSPS'
+		);
+		$data['igsjnepro_services'][] = array(
+			'text'  => 'JNE City Courier',
+			'value' => 'CTCYES'
 		);
 		$data['igsjnepro_services'][] = array(
 			'text'  => 'JNE Trucking',
@@ -235,6 +267,22 @@ class ControllerExtensionShippingShindopro extends Controller {
 			'value' => 'Paket Kilat Khusus'
 		);
 		$data['igspospro_services'][] = array(
+			'text'  => 'Express Sameday Barang',
+			'value' => 'Express Sameday Barang'
+		);
+		$data['igspospro_services'][] = array(
+			'text'  => 'Express Sameday Dokumen',
+			'value' => 'Express Sameday Dokumen'
+		);
+		$data['igspospro_services'][] = array(
+			'text'  => 'Express Next Day Dokumen',
+			'value' => 'Express Next Day Dokumen'
+		);
+		$data['igspospro_services'][] = array(
+			'text'  => 'Express Next Day Barang',
+			'value' => 'Express Next Day Barang'
+		);
+		$data['igspospro_services'][] = array(
 			'text'  => 'Paket Jumbo Ekonomi',
 			'value' => 'Paket Jumbo Ekonomi'
 		);
@@ -269,43 +317,16 @@ class ControllerExtensionShippingShindopro extends Controller {
 			'text'  => 'Regular Service',
 			'value' => 'EZ'
 		);
-
-		//----
-		//tambahan
-		$data['igsjnepro_services'][] = array(
-			'text'  => 'JNE City Courier',
-			'value' => 'CTC'
+		//---
+		$data['igssicepatpro_services'][] = array(
+			'text'  => 'Layanan Reguler',
+			'value' => 'REG'
 		);
-		$data['igsjnepro_services'][] = array(
-			'text'  => 'JNE City Courier',
-			'value' => 'CTCOKE'
-		);
-		$data['igsjnepro_services'][] = array(
-			'text'  => 'JNE City Courier',
-			'value' => 'CTCSPS'
-		);
-		$data['igsjnepro_services'][] = array(
-			'text'  => 'JNE City Courier',
-			'value' => 'CTCYES'
-		);
-		$data['igspospro_services'][] = array(
-			'text'  => 'Express Sameday Barang',
-			'value' => 'Express Sameday Barang'
-		);
-		$data['igspospro_services'][] = array(
-			'text'  => 'Express Sameday Dokumen',
-			'value' => 'Express Sameday Dokumen'
-		);
-		$data['igspospro_services'][] = array(
-			'text'  => 'Express Next Day Dokumen',
-			'value' => 'Express Next Day Dokumen'
-		);
-		$data['igspospro_services'][] = array(
-			'text'  => 'Express Next Day Barang',
-			'value' => 'Express Next Day Barang'
+		$data['igssicepatpro_services'][] = array(
+			'text'  => 'Besok Sampai Tujuan',
+			'value' => 'BEST'
 		);
 
-		//----
 
 		$data['token'] = $this->session->data['token'];
 

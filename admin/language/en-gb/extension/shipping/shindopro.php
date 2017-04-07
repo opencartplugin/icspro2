@@ -13,12 +13,15 @@ $_['tab_igspospro']  = 'POS Indonesia';
 $_['tab_igsjnepro']   = 'JNE';
 $_['tab_igswahanapro']   = 'Wahana';
 $_['tab_igsjntpro']   = 'J & T';
+$_['tab_igssicepatpro']   = 'SiCepat';
 
 $_['entry_service']       = 'Services';
 $_['entry_apikey']       = 'API Key';
 $_['entry_province']  = 'Origin Province';
 $_['entry_city']   = 'Origin City/District';
 $_['entry_subdistrict']   = 'Origin Sub District';
+$_['entry_title']     = 'Title';
+$_['entry_sort']     = 'Sort by Cost Shipping';
 
 $_['entry_handling']     = 'Handling Fee (Rp)';
 $_['entry_handlingmode']     = 'Handling Fee Mode';

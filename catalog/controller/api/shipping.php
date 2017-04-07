@@ -67,7 +67,7 @@ class ControllerApiShipping extends Controller {
 						$json['error']['district'] = $this->language->get('error_district');
 					}
 				}
-      
+
 
 				if (!isset($this->request->post['zone_id']) || $this->request->post['zone_id'] == '') {
 					$json['error']['zone'] = $this->language->get('error_zone');
@@ -128,7 +128,7 @@ class ControllerApiShipping extends Controller {
 
         'district_id'    => $this->request->post['district_id'],//frd 1
         'subdistrict_id' => $this->request->post['subdistrict_id'],//frd 1
-      
+
 						'zone_code'      => $zone_code,
 						'country_id'     => $this->request->post['country_id'],
 						'country'        => $country,
@@ -156,7 +156,7 @@ class ControllerApiShipping extends Controller {
         }
         //---
 
-      
+
 					$json['success'] = $this->language->get('text_address');
 
 					unset($this->session->data['shipping_method']);
@@ -201,7 +201,7 @@ class ControllerApiShipping extends Controller {
 				$results = $this->model_extension_extension->getExtensions('shipping');
 
         //frd 3
-        $results[] = array('code'=>'igspospro');
+        /*$results[] = array('code'=>'igspospro');
 				$results[] = array('code'=>'igstikipro');
 				$results[] = array('code'=>'igsjnepro');
 				$results[] = array('code'=>'igswahanapro');
@@ -210,9 +210,17 @@ class ControllerApiShipping extends Controller {
 					if ($result['code']=='shindopro') {
 						unset ($results[$key]);
 					}
-				}
+				}*/
+				// frd update
+				$mod = array('igsjnepro','igspospro','igstikipro', 'igswahanapro', 'igsjntpro', 'igssicepatpro');
+  			foreach ($results as $key => $result) {
+  				if (in_array($result['code'], $mod)) {
+  					unset ($results[$key]);
+  				}
+  			}
+
 				//----
-      
+
 
 				foreach ($results as $result) {
 					if ($this->config->get($result['code'] . '_status')) {

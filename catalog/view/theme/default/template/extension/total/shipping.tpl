@@ -31,7 +31,7 @@
         <option value="<?php echo $zone_id; ?>"></option>
         <?php } ?>
         <!---frd-->
-      
+
             </select>
           </div>
         </div>
@@ -65,7 +65,7 @@
         </div>
 
         <!---->
-      
+
         <div class="form-group required">
           <label class="col-sm-2 control-label" for="input-postcode"><?php echo $entry_postcode; ?></label>
           <div class="col-sm-10">
@@ -79,10 +79,10 @@ $('#button-quote').on('click', function() {
 	$.ajax({
 		url: 'index.php?route=extension/total/shipping/quote',
 		type: 'post',
-		
+
         /*frd 3*/
         data: 'country_id=' + $('select[name=\'country_id\']').val() + '&zone_id=' + $('select[name=\'zone_id\']').val() + '&postcode=' + encodeURIComponent($('input[name=\'postcode\']').val()) + '&district_id=' + $('select[name=\'district_id\']').val() + '&subdistrict_id=' + $('select[name=\'subdistrict_id\']').val(),
-      
+
 		dataType: 'json',
 		beforeSend: function() {
 			$('#button-quote').button('loading');
@@ -114,7 +114,7 @@ $('#button-quote').on('click', function() {
 					$('select[name=\'district_id\']').after('<div class="text-danger">' + json['error']['district'] + '</div>');
 				}
         /*--*/
-      
+
 				if (json['error']['postcode']) {
 					$('input[name=\'postcode\']').after('<div class="text-danger">' + json['error']['postcode'] + '</div>');
 				}
@@ -134,18 +134,24 @@ $('#button-quote').on('click', function() {
 				for (i in json['shipping_method']) {
 					html += '<p><strong>' + json['shipping_method'][i]['title'] + '</strong></p>';
 
+
 					if (!json['shipping_method'][i]['error']) {
 						for (j in json['shipping_method'][i]['quote']) {
 							html += '<div class="radio">';
 							html += '  <label>';
 
-							if (json['shipping_method'][i]['quote'][j]['code'] == '<?php echo $shipping_method; ?>') {
+							/*replace if (json['shipping_method'][i]['quote'][j]['code'] == '<?php echo $shipping_method; ?>') {
 								html += '<input type="radio" name="shipping_method" value="' + json['shipping_method'][i]['quote'][j]['code'] + '" checked="checked" />';
 							} else {
 								html += '<input type="radio" name="shipping_method" value="' + json['shipping_method'][i]['quote'][j]['code'] + '" />';
+							}*/
+              if (json['shipping_method'][i]['quote'][j]['code'] == '<?php echo $shipping_method; ?>') {
+								html += '<input type="radio" name="shipping_method" value="' + json['shipping_method'][i]['quote'][j]['code'] + '" checked="checked" />' + '<img src="' +  json['shipping_method'][i]['quote'][j]['icon'] + '" alt="" style="width:64px;height:32px;">';
+							} else {
+								html += '<input type="radio" name="shipping_method" value="' + json['shipping_method'][i]['quote'][j]['code'] + '" />' + '<img src="' +  json['shipping_method'][i]['quote'][j]['icon'] + '" alt="" style="width:64px;height:32px;">';
 							}
 
-							
+
         /*frd 4*/
         if(typeof(json['shipping_method'][i]['quote'][j]['etd']) != "undefined" && json['shipping_method'][i]['quote'][j]['etd'] !== null) {
           html += json['shipping_method'][i]['quote'][j]['title'] + ' - ' + json['shipping_method'][i]['quote'][j]['text'] + '<p style="font-size:85%;">Est: ' + json['shipping_method'][i]['quote'][j]['etd'] + '</p>' + '</label></div>';
@@ -153,7 +159,7 @@ $('#button-quote').on('click', function() {
           html += json['shipping_method'][i]['quote'][j]['title'] + ' - ' + json['shipping_method'][i]['quote'][j]['text'] + '</label></div>';
         }
         /*--*/
-      
+
 						}
 					} else {
 						html += '<div class="alert alert-danger">' + json['shipping_method'][i]['error'] + '</div>';
@@ -341,7 +347,7 @@ $('select[name=\'country_id\']').trigger('change');
 
         //--></script>
 
-      
+
     </div>
   </div>
 </div>

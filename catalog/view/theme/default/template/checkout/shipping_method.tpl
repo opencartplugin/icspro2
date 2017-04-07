@@ -11,15 +11,13 @@
   <label>
     <?php if ($quote['code'] == $code || !$code) { ?>
     <?php $code = $quote['code']; ?>
-    <input type="radio" name="shipping_method" value="<?php echo $quote['code']; ?>" checked="checked" />
+    <input type="radio" name="shipping_method" value="<?php echo $quote['code']; ?>" checked="checked" /><img src="<?php echo $quote['icon']; ?>" alt="" style="width:64px;height:32px;"> <!-- farid update-->
     <?php } else { ?>
-    <input type="radio" name="shipping_method" value="<?php echo $quote['code']; ?>" />
+    <input type="radio" name="shipping_method" value="<?php echo $quote['code']; ?>" /><img src="<?php echo $quote['icon']; ?>" alt="" style="width:64px;height:32px;">
     <?php } ?>
-    
         <!--frd 1-->
         <?php echo $quote['title']; ?> - <?php echo $quote['text']; ?><p style="font-size:85%;"><?php echo isset($quote['etd']) ?  'Est: ' . $quote['etd'] : ''; ?></p></label>
         <!---->
-      
 </div>
 <?php } ?>
 <?php } else { ?>
