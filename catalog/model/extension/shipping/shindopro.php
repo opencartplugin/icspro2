@@ -120,21 +120,7 @@ class ModelExtensionShippingShindopro extends Model {
 		}
 
 		if ($this->config->get($classname . '_sort')) {
-			$tmpquote_data = $quote_data;
-			usort($tmpquote_data, 'compare_cost');
-			$quote_data = array();
-			foreach ($tmpquote_data as  $d) {
-				$quote_data[$d['sername']] = array(
-					'code'         => $d['code'],
-					'title'        => $d['title'],// . $etd,
-					'cost'         => $d['cost'],
-					'tax_class_id' => $d['tax_class_id'],
-					'text'         => $d['text'],
-					'icon'			 => $d['icon'],
-					'courier' => $d['courier'],
-				);
-
-			}
+			uasort($quote_data, 'compare_cost');
 		}
 
 		$method_data = array(
