@@ -122,7 +122,6 @@ class ModelExtensionShippingShindopro extends Model {
 		if ($this->config->get($classname . '_sort')) {
 			uasort($quote_data, 'compare_cost');
 		}
-
 		$method_data = array(
 			'code'       => 'shindopro',
 			'title'      => $title,

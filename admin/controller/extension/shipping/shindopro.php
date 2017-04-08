@@ -43,7 +43,6 @@ class ControllerExtensionShippingShindopro extends Controller {
 		$data['entry_handlingmode'] = $this->language->get('entry_handlingmode');
 		$data['option_handlingmode1'] = $this->language->get('option_handlingmode1');
 		$data['option_handlingmode2'] = $this->language->get('option_handlingmode2');
-		$data['entry_sort_order'] = $this->language->get('entry_sort_order');
 
 		$data['entry_province'] = $this->language->get('entry_province');
 		$data['entry_city'] = $this->language->get('entry_city');
@@ -55,7 +54,6 @@ class ControllerExtensionShippingShindopro extends Controller {
 		$data['entry_geo_zone'] =  $this->language->get('entry_geo_zone');
 		$data['entry_service'] =  $this->language->get('entry_service');
 
-		$data['entry_sort_order'] = $this->language->get('entry_sort_order');
 		$data['help_rate'] = $this->language->get('help_rate');
 		$data['help_weight_class'] = $this->language->get('help_weight_class');
 
@@ -183,15 +181,8 @@ class ControllerExtensionShippingShindopro extends Controller {
 			} else {
 				$data[$m . '_service'] = array();
 			}
-
-			if (isset($this->request->post[$m .'_sort_order'])) {
-				$data[$m .'_sort_order'] = $this->request->post[$m .'_sort_order'];
-			} else {
-				$data[$m .'_sort_order'] = $this->config->get($m .'_sort_order');
-			}
-
-
 		}
+
 		$data['igsjnepro_services'] = array();
 		$data['igspospro_services'] = array();
 		$data['igstikipro_services'] = array();

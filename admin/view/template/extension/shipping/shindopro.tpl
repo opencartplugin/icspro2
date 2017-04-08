@@ -219,13 +219,6 @@
                     </div>
                   </div>
                 </div>
-                <div class="form-group">
-                  <label class="col-sm-2 control-label" for="input-<?php echo $m;?>-sort-order"><?php echo $entry_sort_order; ?></label>
-                  <div class="col-sm-10">
-                    <input type="text" name="<?php echo $m;?>_sort_order" value="<?php echo ${$m .'_sort_order'};?>" placeholder="<?php echo $entry_sort_order; ?>" id="input-<?php echo $m;?>-sort-order" class="form-control" />
-                  </div>
-                </div>
-
               </div>
 
               <?php } ?>
